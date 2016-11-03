@@ -1261,14 +1261,9 @@ margin-top: 24px;
 transition: all 0.3s ease-in-out;
 opacity: 1;
 }
-a.more-linknbt {
-font-size: 0.8125em;
-line-height: 1.84615em;
-letter-spacing: 1px;
-font-weight: normal;
-text-transform: uppercase;
-color: #ada393;
-text-decoration: none;
+.jump-link {
+float: right;
+margin-top: 10px;
 }
 .entry-title {
 line-height: 1.25217em;
@@ -1656,11 +1651,11 @@ border:none !important;
 }
 .pbtthumbimg {
 float:left;
-margin:0px 10px 5px 0px;
+margin:0px 15px 10px 0px;
 padding:0px;
 border:0px solid #eee;
 background:none;
-width:240px;
+width:200px;
 height:auto;
 }
 .status-msg-wrap {
@@ -1745,38 +1740,6 @@ margin-bottom: 32px;
       summary_img = 220;
       img_thumb_height = 150;
       img_thumb_width = 200; 
-    </script>
-    <script type='text/javascript'>
-      //<![CDATA[
-      function removeHtmlTag(strx,chop){ 
-        if(strx.indexOf("<")!=-1)
-        {
-          var s = strx.split("<"); 
-          for(var i=0;i<s.length;i++){ 
-            if(s[i].indexOf(">")!=-1){ 
-              s[i] = s[i].substring(s[i].indexOf(">")+1,s[i].length); 
-            } 
-          } 
-          strx =  s.join(""); 
-        }
-        chop = (chop < strx.length-1) ? chop : strx.length-2; 
-        while(strx.charAt(chop-1)!=' ' && strx.indexOf(' ',chop)!=-1) chop++; 
-        strx = strx.substring(0,chop-1); 
-        return strx+'...'; 
-      }
-      function createSummaryAndThumb(pID){
-        var div = document.getElementById(pID);
-        var imgtag = "";
-        var img = div.getElementsByTagName("img");
-        var summ = summary_noimg;
-        if(img.length>=1) {	
-          imgtag = '<img src="'+img[0].src+'" class="pbtthumbimg"/>';
-          summ = summary_img;
-        }
-        var summary = imgtag + '<div>' + removeHtmlTag(div.innerHTML,summ) + '</div>';
-        div.innerHTML = summary;
-      }
-      //]]>
     </script>
     <style type='text/css'>
       #image-gallery { display: none; }
@@ -2820,30 +2783,16 @@ margin-bottom: 32px;
                       </header>
                       <div class='post-header-line-1'/>
                       <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' itemprop='articleBody'>
-                        <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-                          <b:if cond='data:blog.pageType != &quot;item&quot;'>
-                            <div expr:id='&quot;summary&quot; + data:post.id'>
-                              <data:post.body/>
-                            </div>
-                            <script type='text/javascript'>
-                              createSummaryAndThumb(&quot;summary<data:post.id/>&quot;);
-                            </script>
+                        <b:if cond='data:post.hasJumpLink'>
+                          <b:if cond='data:post.firstImageUrl'>
+                            <img expr:src='data:post.firstImageUrl' class="pbtthumbimg"/>
                           </b:if>
                         </b:if>
-                        <b:if cond='data:blog.pageType == &quot;item&quot;'>
-                          <data:post.body/>
-                        </b:if>
-                        <b:if cond='data:blog.pageType == &quot;static_page&quot;'>
-                          <data:post.body/>
-                        </b:if>
-                        <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-                          <b:if cond='data:blog.pageType != &quot;item&quot;'>
-                            <div style='float:right;padding-right:0px;margin-top:10px;'>
-                              <a class='more-linknbt' expr:href='data:post.url'>
-                                Mehr lesen...
-                              </a>
-                            </div>
-                          </b:if>
+                        <div><data:post.body/></div>
+                        <b:if cond='data:post.hasJumpLink'>
+                          <div class='jump-link entry-metanbt'>
+                            <a expr:href='data:post.url + "#more"'><data:post.jumpText/></a>
+                          </div>
                         </b:if>
                         <div style='clear: both;'/>
                         <!-- clear for photos floats -->
