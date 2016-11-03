@@ -12,21 +12,21 @@
       <title>
         <data:blog.title/>
       </title>
-      <b:else/>
+    <b:else/>
       <b:if cond='data:blog.pageType != &quot;error_page&quot;'>
         <title>
           <data:blog.pageName/>
           ~ 
           <data:blog.title/>
         </title>
-        <b:else/>
+      <b:else/>
         <title>
           404 ~ Page Not Found!
         </title>
       </b:if>
     </b:if>
-    <b:skin><![CDATA[
-      
+    <b:skin>
+      <![CDATA[
 /*
 -----------------------------------------------
 Template Name  : Fictive
@@ -1310,11 +1310,6 @@ color: #7c705e;
 -o-transition: all 0.3s ease-in-out;
 transition: all 0.3s ease-in-out;
 }
-@media screen and (max-width: 51em) {
-header .entry-metanbt, header .entry-metanbt a, .entry-metanbt header a {
-text-align: left;
-}
-}
 .comments-linknbt,
 .post-datenbt,
 .bylinenbt,
@@ -1709,8 +1704,29 @@ text-indent: initial;
 padding-left: 0;
 }
 }
-
-    ]]></b:skin>
+/* --- Print Styles --- */
+@media print {
+.site-headernbt,
+.site-contentnbt {
+clear: both;
+float: none;
+margin: 0 auto;
+width: 100%;
+}
+.main-navigationnbt,
+.widget-areanbt,
+.entry-formatnbt,
+.hentry:before,
+.entry-metanbt > span:not(.post-datenbt),
+.blog-pager {
+display: none;
+}
+.hentry-wrappernbt {
+margin-bottom: 32px;
+}
+}
+]]>
+    </b:skin>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' type='text/javascript'/>
     <script type='text/javascript'>
       //<![CDATA[
@@ -1762,62 +1778,59 @@ padding-left: 0;
       }
       //]]>
     </script>
-
-<style type='text/css'>
-#image-gallery { display: none; }
-#jquery-gallery {padding:0;margin:0;list-style: none; width: 200px; }
-#jquery-gallery li {background-size: 100%;-webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover;background-size: cover;margin-right: 10px; width: 80px; height: 80px; border: 3px solid #fff; outline: 1px solid #ddd; margin-right: 10px; margin-bottom: 10px; opacity: .5;filter:alpha(opacity=50); float: left; display: block; }
-#jquery-gallery li img { position: absolute; top: 0px; left: 200px; display: none; }
-#jquery-gallery li.active img { display: block; width:370px; border: 3px solid #fff; outline: 1px solid #E3E3E3; }
-#jquery-gallery li.active, #jquery-gallery li:hover { outline-color: #bbb; opacity: .99;filter:alpha(opacity=99);}
-#gallery-caption { position: absolute; right: 50px;color: #000;background: #FFFFFF;font-weight: bold; font-size: 16px; top: 0px;}
-</style>
-
-<script type='text/javascript'>
-//<![CDATA[
-var gal = {
-init : function() {
-if (!document.getElementById || !document.createElement || !document.appendChild) return false;
-if (document.getElementById('image-gallery')) document.getElementById('image-gallery').id = 'jquery-gallery';
-var li = document.getElementById('jquery-gallery').getElementsByTagName('li');
-li[0].className = 'active';
-for (i=0; i<li.length; i++) {
-li[i].style.backgroundImage = 'url(' + li[i].getElementsByTagName('img')[0].src + ')';
-li[i].title = li[i].getElementsByTagName('img')[0].alt;
-gal.addEvent(li[i],'click',function() {
-var im = document.getElementById('jquery-gallery').getElementsByTagName('li');
-for (j=0; j<im.length; j++) {
-im[j].className = '';
-}
-this.className = 'active';
-document.getElementById('gallery-caption').innerHTML = this.title;
-});
-}
-},
-addEvent : function(obj, type, fn) {
-if (obj.addEventListener) {
-obj.addEventListener(type, fn, false);
-}
-else if (obj.attachEvent) {
-obj["e"+type+fn] = fn;
-obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
-obj.attachEvent("on"+type, obj[type+fn]);
-}
-}
-}
-gal.addEvent(window,'load', function() {
-gal.init();
-});
-//]]>
-</script>
-
+    <style type='text/css'>
+      #image-gallery { display: none; }
+      #jquery-gallery {padding:0;margin:0;list-style: none; width: 200px; }
+      #jquery-gallery li {background-size: 100%;-webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover;background-size: cover;margin-right: 10px; width: 80px; height: 80px; border: 3px solid #fff; outline: 1px solid #ddd; margin-right: 10px; margin-bottom: 10px; opacity: .5;filter:alpha(opacity=50); float: left; display: block; }
+      #jquery-gallery li img { position: absolute; top: 0px; left: 200px; display: none; }
+      #jquery-gallery li.active img { display: block; width:370px; border: 3px solid #fff; outline: 1px solid #E3E3E3; }
+      #jquery-gallery li.active, #jquery-gallery li:hover { outline-color: #bbb; opacity: .99;filter:alpha(opacity=99);}
+      #gallery-caption { position: absolute; right: 50px;color: #000;background: #FFFFFF;font-weight: bold; font-size: 16px; top: 0px;}
+    </style>
+    <script type='text/javascript'>
+      //<![CDATA[
+      var gal = {
+        init : function() {
+          if (!document.getElementById || !document.createElement || !document.appendChild) return false;
+          if (document.getElementById('image-gallery')) document.getElementById('image-gallery').id = 'jquery-gallery';
+          var li = document.getElementById('jquery-gallery').getElementsByTagName('li');
+          li[0].className = 'active';
+          for (i=0; i<li.length; i++) {
+            li[i].style.backgroundImage = 'url(' + li[i].getElementsByTagName('img')[0].src + ')';
+            li[i].title = li[i].getElementsByTagName('img')[0].alt;
+            gal.addEvent(li[i],'click',function() {
+              var im = document.getElementById('jquery-gallery').getElementsByTagName('li');
+              for (j=0; j<im.length; j++) {
+                im[j].className = '';
+              }
+              this.className = 'active';
+              document.getElementById('gallery-caption').innerHTML = this.title;
+            });
+          }
+        },
+        addEvent : function(obj, type, fn) {
+          if (obj.addEventListener) {
+            obj.addEventListener(type, fn, false);
+          }
+          else if (obj.attachEvent) {
+            obj["e"+type+fn] = fn;
+            obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
+            obj.attachEvent("on"+type, obj[type+fn]);
+          }
+        }
+      }
+      gal.addEvent(window,'load', function() {
+        gal.init();
+      });
+      //]]>
+    </script>
   </head>
   <body>
     <div class='sitenbt' id='pagenbt'>
       <header class='site-headernbt' id='mastheadnbt' role='banner'>
         <!-- header image -->
         <a expr:href='data:blog.homepageUrl'>
-          <img alt='' class='header-imagenbt' height='1000' src='https://lh5.googleusercontent.com/-y1I-fr5T3fw/VPay9gf6MMI/AAAAAAAAEFs/-PCRQe52dxo/w966-h543-no/spicewolf-wallpaper-311826.png' width='1112'/>
+          <img alt='' class='header-imagenbt' width='960' height='540' src='https://lh5.googleusercontent.com/-y1I-fr5T3fw/VPay9gf6MMI/AAAAAAAAEFs/-PCRQe52dxo/w966-h543-no/spicewolf-wallpaper-311826.png'/>
         </a>
         <div class='site-brandingnbt'>
           <!-- header avatar -->
@@ -1932,26 +1945,27 @@ gal.init();
           <b:section class='sidebarleftsecnbt' id='sidebarleftsecnbt' preferred='yes'>
             <b:widget id='Gadget1' locked='false' title='Karte (Beiträge)' type='Gadget' visible='true'>
               <b:includable id='main'>
-  <!-- only display title if it's non-empty -->
-  <b:if cond='data:renderingUrl != &quot;&quot;'>
-    <b:if cond='data:title != &quot;&quot;'>
-      <h2 class='title'><data:title/></h2>
-    </b:if>
-    <b:if cond='data:gadgetSnippet != &quot;&quot;'>
-       <data:gadgetSnippet/>
-    <b:else/>
-      <div class='widget-content'>
-        <b:if cond='data:nonSocialFragment != &quot;&quot;'>
-          <data:nonSocialFragment/>
-        </b:if>
-      </div>
-    </b:if>
-  <b:else/>
-    <data:errorMessage/>
-  </b:if>
-
-  <b:include name='quickedit'/>
-</b:includable>
+                <!-- only display title if it's non-empty -->
+                <b:if cond='data:renderingUrl != &quot;&quot;'>
+                  <b:if cond='data:title != &quot;&quot;'>
+                    <h2 class='title'>
+                      <data:title/>
+                    </h2>
+                  </b:if>
+                  <b:if cond='data:gadgetSnippet != &quot;&quot;'>
+                    <data:gadgetSnippet/>
+                    <b:else/>
+                    <div class='widget-content'>
+                      <b:if cond='data:nonSocialFragment != &quot;&quot;'>
+                        <data:nonSocialFragment/>
+                      </b:if>
+                    </div>
+                  </b:if>
+                  <b:else/>
+                  <data:errorMessage/>
+                </b:if>
+                <b:include name='quickedit'/>
+              </b:includable>
             </b:widget>
             <b:widget id='Label1' locked='false' title='Kategorien' type='Label' visible='true'>
               <b:includable id='main'>
@@ -2812,7 +2826,8 @@ gal.init();
                               <data:post.body/>
                             </div>
                             <script type='text/javascript'>
-                              createSummaryAndThumb(&quot;summary<data:post.id/>&quot;);</script>
+                              createSummaryAndThumb(&quot;summary<data:post.id/>&quot;);
+                            </script>
                           </b:if>
                         </b:if>
                         <b:if cond='data:blog.pageType == &quot;item&quot;'>
@@ -3262,20 +3277,6 @@ gal.init();
         var $masthead = $( '.site-headernbt' );
         var $timeout = false;
         var $sidebarheight = $masthead.height() + 100;
-        var $originalPosition = $( '.site-brandingnbt' ).position().top;
-        var $scrollPosition;
-        //Calculate distance to scroll
-        if ( $width < 600 ) { //Static admin bar
-          $scrollPosition = $originalPosition - 20;
-        } else { //Fixed admin bar
-          $scrollPosition = $originalPosition - 60;
-        }
-        //Scroll past header image on screen widths less than 820px
-        $.fn.scrollDown = function() {
-          $( 'body,html' ).animate( {
-            scrollTop: $scrollPosition
-          }, 400 );
-        };
         //Allow sidebar to scroll if the sidebar is too tall for the screen height
         if ( $sidebarheight > $height ) {
           $masthead.css( 'position', 'relative' );
@@ -3313,7 +3314,6 @@ gal.init();
           $.fn.navToggle();
           $.fn.widgetsToggle();
           $.fn.searchToggle();
-          $.fn.scrollDown();
         }
         // Check viewport width when user resizes the browser window.
         $( window ).on( 'resize', function() {
@@ -3322,11 +3322,6 @@ gal.init();
             clearTimeout( $timeout );
           }
           $timeout = setTimeout( function() {
-            if ( $width < 600 ) { //Static admin bar
-              $scrollPosition = $originalPosition - 20;
-            } else { //Fixed admin bar
-              $scrollPosition = $originalPosition - 60;
-            }
             //Allow sidebar to scroll if the sidebar is too tall for the screen height
             if ( $sidebarheight > $height ) {
               $masthead.css( 'position', 'relative' );
@@ -3335,8 +3330,6 @@ gal.init();
               $.fn.navToggle();
               $.fn.widgetsToggle();
               $.fn.searchToggle();
-              $.fn.scrollDown();
-              $.fn.scrollDown();
             } else {
               $( '.main-navigationnbt' ).removeClass( 'active' );
               $( '.widget-areanbt' ).removeClass( 'active' );
