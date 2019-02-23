@@ -1729,58 +1729,6 @@ margin-bottom: 32px;
       function rp(json){document.write('<ul>');for(var i=0;i<numposts;i++){document.write('<li>');var entry=json.feed.entry[i];var posttitle=entry.title.$t;var posturl;if(i==json.feed.entry.length)break;for(var k=0;k<entry.link.length;k++){if(entry.link[k].rel=='alternate'){posturl=entry.link[k].href;break}}posttitle=posttitle.link(posturl);var readmorelink="(more)";readmorelink=readmorelink.link(posturl);var postdate=entry.published.$t;var cdyear=postdate.substring(0,4);var cdmonth=postdate.substring(5,7);var cdday=postdate.substring(8,10);var monthnames=new Array();monthnames[1]="Jan";monthnames[2]="Feb";monthnames[3]="Mar";monthnames[4]="Apr";monthnames[5]="May";monthnames[6]="Jun";monthnames[7]="Jul";monthnames[8]="Aug";monthnames[9]="Sep";monthnames[10]="Oct";monthnames[11]="Nov";monthnames[12]="Dec";if("content"in entry){var postcontent=entry.content.$t}else if("summary"in entry){var postcontent=entry.summary.$t}else var postcontent="";var re=/<\S[^>]*>/g;postcontent=postcontent.replace(re,"");document.write(posttitle);if(showpostdate==true)document.write(' - '+monthnames[parseInt(cdmonth,10)]+' '+cdday);if(showpostsummary==true){if(postcontent.length<numchars){document.write(postcontent)}else{postcontent=postcontent.substring(0,numchars);var quoteEnd=postcontent.lastIndexOf(" ");postcontent=postcontent.substring(0,quoteEnd);document.write(postcontent+'...'+readmorelink)}}document.write('</li>')}document.write('</ul>')}
       //]]>
     </script>
-    <script type='text/javascript'>
-      summary_noimg = 300;
-      summary_img = 220;
-      img_thumb_height = 150;
-      img_thumb_width = 200; 
-    </script>
-    <style type='text/css'>
-      #image-gallery { display: none; }
-      #jquery-gallery {padding:0;margin:0;list-style: none; width: 200px; }
-      #jquery-gallery li {background-size: 100%;-webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover;background-size: cover;margin-right: 10px; width: 80px; height: 80px; border: 3px solid #fff; outline: 1px solid #ddd; margin-right: 10px; margin-bottom: 10px; opacity: .5;filter:alpha(opacity=50); float: left; display: block; }
-      #jquery-gallery li img { position: absolute; top: 0px; left: 200px; display: none; }
-      #jquery-gallery li.active img { display: block; width:370px; border: 3px solid #fff; outline: 1px solid #E3E3E3; }
-      #jquery-gallery li.active, #jquery-gallery li:hover { outline-color: #bbb; opacity: .99;filter:alpha(opacity=99);}
-      #gallery-caption { position: absolute; right: 50px;color: #000;background: #FFFFFF;font-weight: bold; font-size: 16px; top: 0px;}
-    </style>
-    <script type='text/javascript'>
-      //<![CDATA[
-      var gal = {
-        init : function() {
-          if (!document.getElementById || !document.createElement || !document.appendChild) return false;
-          if (document.getElementById('image-gallery')) document.getElementById('image-gallery').id = 'jquery-gallery';
-          var li = document.getElementById('jquery-gallery').getElementsByTagName('li');
-          li[0].className = 'active';
-          for (i=0; i<li.length; i++) {
-            li[i].style.backgroundImage = 'url(' + li[i].getElementsByTagName('img')[0].src + ')';
-            li[i].title = li[i].getElementsByTagName('img')[0].alt;
-            gal.addEvent(li[i],'click',function() {
-              var im = document.getElementById('jquery-gallery').getElementsByTagName('li');
-              for (j=0; j<im.length; j++) {
-                im[j].className = '';
-              }
-              this.className = 'active';
-              document.getElementById('gallery-caption').innerHTML = this.title;
-            });
-          }
-        },
-        addEvent : function(obj, type, fn) {
-          if (obj.addEventListener) {
-            obj.addEventListener(type, fn, false);
-          }
-          else if (obj.attachEvent) {
-            obj["e"+type+fn] = fn;
-            obj[type+fn] = function() { obj["e"+type+fn]( window.event ); }
-            obj.attachEvent("on"+type, obj[type+fn]);
-          }
-        }
-      }
-      gal.addEvent(window,'load', function() {
-        gal.init();
-      });
-      //]]>
-    </script>
   </head>
   <body>
     <div class='sitenbt' id='pagenbt'>
