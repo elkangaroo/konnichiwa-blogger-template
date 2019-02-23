@@ -434,7 +434,7 @@ html {
 font-size: 16px;
 line-height: 1.5em;
 }
-.entry-formatnbt, .hentry:before, .menu-togglenbt:before, .hentry.format-linknbt .entry-title a:after, .comments-linknbt a:before,
+.entry-formatnbt, .hentry:before, .menu-togglenbt:before, .search-submitnbt:before, .hentry.format-linknbt .entry-title a:after, .comments-linknbt a:before,
 .post-datenbt a:before,
 .bylinenbt a:before,
 .edit-linknbt a:before,
@@ -1098,20 +1098,29 @@ vertical-align: middle;
 display: block;
 }
 }
-.header-searchnbt {
-display: none;
+.searchnbt {
 position: relative;
 }
+.site-searchnbt {
+display: block;
+margin: 0 auto 24px;
+}
+.header-searchnbt {
+display: none;
+}
 @media screen and (max-width: 51em) {
+.site-searchnbt {
+display: none;
+}
 .header-searchnbt {
 display: block;
 }
 }
-.header-searchnbt label {
+.searchnbt label {
 width: 75%;
 }
-.header-searchnbt input,
-.header-searchnbt input:focus {
+.searchnbt input,
+.searchnbt input:focus {
 border: 0;
 -webkit-appearance: none;
 -webkit-border-radius: 0;
@@ -1120,11 +1129,12 @@ border: 0;
 -o-border-radius: 0;
 border-radius: 0;
 }
-.header-searchnbt input[type="search"] {
+.searchnbt input[type="search"] {
 background-color: white;
 height: 48px;
 }
-.header-searchnbt input[type="submit"] {
+.searchnbt input[type="submit"],
+.searchnbt button[type="submit"] {
 background-color: #bd5532;
 display: block;
 margin: 0;
@@ -1134,8 +1144,12 @@ right: 0;
 width: 25%;
 height: 48px;
 }
-.header-searchnbt input[type="submit"]:hover {
+.searchnbt input[type="submit"]:hover,
+.searchnbt button[type="submit"]:hover {
 background-color: #a94c2d;
+}
+#site-searchnbt button[type="submit"]:before {
+content: "\f002";
 }
 #search-togglenbt:before {
 content: "\f002";
@@ -1792,6 +1806,17 @@ margin-bottom: 32px;
             </div>
           </div>
         </div>
+        <div class='site-searchnbt searchnbt' id='site-searchnbt'>
+          <form action='/search' class='search-formnbt' method='get' role='search'>
+            <label>
+              <span class='screen-reader-textnbt'>
+                Suche nach:
+              </span>
+              <input class='search-fieldnbt' name='q' placeholder='Suche nach:' title='Suche nach:' type='search' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'/>
+            </label>
+            <button class='search-submitnbt' type='submit'></button>
+          </form>
+        </div>
         <div class='menu-togglesnbt clearnbt'>
           <h1 class='menu-togglenbt' id='menu-togglenbt' title='Menü'>
             <span class='screen-reader-textnbt'>
@@ -2031,13 +2056,13 @@ margin-bottom: 32px;
           </b:section>
         </div>
         <!-- #secondary -->
-        <div class='header-searchnbt' id='site-searchnbt'>
+        <div class='header-searchnbt searchnbt' id='header-searchnbt'>
           <form action='/search' class='search-formnbt' method='get' role='search'>
             <label>
               <span class='screen-reader-textnbt'>
                 Suche nach:
               </span>
-              <input class='search-fieldnbt' name='q' placeholder='Suche' title='Suche nach:' type='search' value=''/>
+              <input class='search-fieldnbt' name='q' placeholder='Suche nach:' title='Suche nach:' type='search' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'/>
             </label>
             <input class='search-submitnbt' type='submit' value='Suchen'/>
           </form>
