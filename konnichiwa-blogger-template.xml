@@ -931,14 +931,14 @@ margin: 0 auto;
 width: 100%;
 }
 }
-.header-nbt {
+.header-avatarnbt {
 display: block;
 left: 50%;
 margin-left: -35px;
 position: absolute;
 top: -46px;
 }
-.header-nbt img {
+.header-avatarnbt img {
 border-radius: 50%;
 position: relative;
 z-index: 2;
