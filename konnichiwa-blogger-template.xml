@@ -931,14 +931,14 @@ margin: 0 auto;
 width: 100%;
 }
 }
-.header-avatarnbt {
+.header-nbt {
 display: block;
 left: 50%;
 margin-left: -35px;
 position: absolute;
 top: -46px;
 }
-.header-avatarnbt img {
+.header-nbt img {
 border-radius: 50%;
 position: relative;
 z-index: 2;
@@ -1748,14 +1748,14 @@ margin-bottom: 32px;
     <div class='sitenbt' id='pagenbt'>
       <header class='site-headernbt' id='mastheadnbt' role='banner'>
         <!-- header image -->
-        <a expr:href='data:blog.homepageUrl'>
+        <a alt='Header Image' expr:href='data:blog.homepageUrl'>
           <img alt='' class='header-imagenbt' width='960' height='540' src='https://lh5.googleusercontent.com/-y1I-fr5T3fw/VPay9gf6MMI/AAAAAAAAEFs/-PCRQe52dxo/w966-h543-no/spicewolf-wallpaper-311826.png'/>
         </a>
         <div class='site-brandingnbt'>
           <!-- header avatar -->
           <div class='header-avatarnbt'>
             <a expr:href='data:blog.homepageUrl'>
-              <img height='70' src='http://gravatar.com/avatar/dc109cd28178378b2a0e294a7f972de1/?s=140&amp;d=mm' width='70'/>
+              <img alt='Avatar' height='70' src='http://gravatar.com/avatar/dc109cd28178378b2a0e294a7f972de1/?s=140&amp;d=mm' width='70'/>
             </a>
           </div>
           <b:section class='headersec' id='headersec' maxwidgets='1' showaddelement='no'>
@@ -1808,13 +1808,13 @@ margin-bottom: 32px;
         </div>
         <div class='site-searchnbt searchnbt' id='site-searchnbt'>
           <form action='/search' class='search-formnbt' method='get' role='search'>
-            <label>
+            <label id='search-label'>
               <span class='screen-reader-textnbt'>
                 Suche nach:
               </span>
               <input class='search-fieldnbt' name='q' placeholder='Suche nach:' title='Suche nach:' type='search' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'/>
             </label>
-            <button class='search-submitnbt' type='submit'></button>
+            <button aria-labelledby='search-label' class='search-submitnbt' type='submit'></button>
           </form>
         </div>
         <div class='menu-togglesnbt clearnbt'>
@@ -2752,7 +2752,7 @@ margin-bottom: 32px;
                       <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' itemprop='articleBody'>
                         <b:if cond='data:post.hasJumpLink'>
                           <b:if cond='data:post.firstImageUrl'>
-                            <img expr:src='data:post.firstImageUrl' class="pbtthumbimg"/>
+                            <img class="pbtthumbimg" expr:alt='data:post.title' expr:src='resizeImage(data:post.firstImageUrl, 200)'/>
                           </b:if>
                         </b:if>
                         <div><data:post.body/></div>
